@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
-from kitchen.models import Dish, Cook
+from kitchen.models import Dish, Cook, DishType, Ingredient
 
 
 class DishForm(forms.ModelForm):
@@ -65,6 +65,12 @@ class CookSearchForm(forms.Form):
     )
 
 
+class DishTypeCreationForm(forms.ModelForm):
+    class Meta:
+        model = DishType
+        fields = ("name",)
+
+
 class DishTypeSearchForm(forms.Form):
     name = forms.CharField(
         max_length=255,
@@ -73,6 +79,33 @@ class DishTypeSearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Search by dish type name"
+            }
+        )
+    )
+
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ["name"]
+        widgets = {
+            "dishes": forms.CheckboxSelectMultiple()
+        }
+
+class IngredientCreationForm(forms.ModelForm):
+    class Meta:
+        model = Ingredient
+        fields = ("name",)
+
+
+class IngredientSearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by ingredients name"
             }
         )
     )

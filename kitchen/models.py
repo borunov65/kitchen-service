@@ -37,3 +37,10 @@ class Dish(models.Model):
 
     def __str__(self):
         return self.name
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=255)
+    dishes = models.ManyToManyField("Dish", related_name="ingredients", blank=True)
+
+    def __str__(self):
+        return self.name

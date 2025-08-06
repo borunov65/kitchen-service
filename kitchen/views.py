@@ -5,14 +5,16 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import Cook, Dish, DishType
+from .models import Cook, Dish, DishType, Ingredient
 from .forms import (
     CookCreationForm,
     CookUpdateForm,
     DishForm,
     DishSearchForm,
     CookSearchForm,
-    DishTypeSearchForm
+    DishTypeSearchForm,
+    IngredientForm,
+    IngredientSearchForm
 )
 
 
@@ -23,6 +25,7 @@ def index(request):
     num_cooks = Cook.objects.count()
     num_dishes = Dish.objects.count()
     num_dish_types = DishType.objects.count()
+    num_ingredients = Ingredient.objects.count()
 
     num_visits = request.session.get("num_visits", 0)
     request.session["num_visits"] = num_visits + 1
@@ -31,6 +34,7 @@ def index(request):
         "num_cooks": num_cooks,
         "num_dishes": num_dishes,
         "num_dish_types": num_dish_types,
+        "num_ingredients": num_ingredients,
         "num_visits": num_visits + 1,
     }
 
@@ -183,3 +187,43 @@ def toggle_assign_to_dish(request, pk):
     else:
         cook.dishes.add(pk)
     return HttpResponseRedirect(reverse_lazy("kitchen:dish-detail", args=[pk]))
+
+
+class IngredientListView(LoginRequiredMixin, generic.ListView):
+    model = Ingredient
+    paginate_by = 5
+
+    def get_context_data(
+        self, *, object_list=None, **kwargs
+    ):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = IngredientSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        form = IngredientSearchForm(self.request.GET)
+        if form.is_valid():
+            return self.model.objects.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return self.model.objects.all()
+
+
+class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Ingredient
+    form_class = IngredientForm
+    success_url = reverse_lazy("kitchen:ingredient-list")
+
+
+class IngredientUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Ingredient
+    form_class = IngredientForm
+    success_url = reverse_lazy("kitchen:ingredient-list")
+
+
+class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy("kitchen:ingredient-list")

@@ -17,7 +17,7 @@
       {% for dish in dish_list %}
         <li>
           <a href="{% url "kitchen:dish-detail" pk=dish.id %}">{{ dish.id }}</a>
-          {{ dish.name }}
+          <a href="{% url "kitchen:dish-detail" pk=dish.id %}">{{ dish.name }}</a>
         </li>
       {% endfor %}
     </ul>
