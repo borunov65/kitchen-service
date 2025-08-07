@@ -37,7 +37,6 @@ class ModelsTests(TestCase):
         )
         self.assertEqual(str(dish), dish.name)
 
-
     def test_ingredient_str(self):
         ingredient = Ingredient.objects.create(
             name="test"

@@ -34,4 +34,13 @@
       <li>{{ cook.username }} ({{ cook.first_name }} {{ cook.last_name }})</li>
     {% endfor %}
   </ul>
+  <h1>
+    Ingredients:
+  </h1>
+  <hr>
+  <ul>
+    {% for ingredient in dish.ingredients.all %}
+      <li>{{ ingredient.name }}</li>
+    {% endfor %}
+  </ul>
 {% endblock %}

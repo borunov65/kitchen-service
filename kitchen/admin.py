@@ -31,9 +31,11 @@ class CookAdmin(UserAdmin):
         ),
     )
 
+
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
     list_display = ("name",)
     search_fields = ("name",)
+
 
 admin.site.register(DishType)

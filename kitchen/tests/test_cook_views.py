@@ -49,7 +49,6 @@ class PrivateCookTest(TestCase):
         self.assertContains(response, "test_username")
         self.assertNotContains(response, "otheruser")
 
-
     def test_search_cook_by_username_no_match(self):
         Cook.objects.create(
             username="test_username"
