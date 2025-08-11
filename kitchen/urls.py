@@ -69,7 +69,7 @@ urlpatterns = [
         name="dish-delete"
     ),
     path(
-        "cars/<int:pk>/toggle-assign/",
+        "dishes/<int:pk>/toggle-assign/",
         toggle_assign_to_dish,
         name="toggle-dish-assign",
     ),
