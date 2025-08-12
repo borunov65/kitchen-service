@@ -66,7 +66,9 @@ class DishTypeListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = DishTypeSearchForm(
             initial={"name": name}
         )
-        context["page_bg"] = "https://images.pexels.com/photos/2403391/pexels-photo-2403391.jpeg"
+        context["page_bg"] = ("https://images.pexels.com/photos/2403391/"
+                              "pexels-photo-2403391.jpeg"
+                              )
         return context
 
     def get_queryset(self):
@@ -114,7 +116,10 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = DishSearchForm(
             initial={"name": name}
         )
-        context["page_bg"] = "https://images.pexels.com/photos/2403392/pexels-photo-2403392.jpeg"
+        context["page_bg"] = (
+            "https://images.pexels.com/photos/2403392/"
+            "pexels-photo-2403392.jpeg"
+        )
         return context
 
     def get_queryset(self):
@@ -164,7 +169,10 @@ class CookListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = CookSearchForm(
             initial={"username": username}
         )
-        context["page_bg"] = "https://images.pexels.com/photos/5251019/pexels-photo-5251019.jpeg"
+        context["page_bg"] = (
+            "https://images.pexels.com/photos/5251019/"
+            "pexels-photo-5251019.jpeg"
+        )
         return context
 
     def get_queryset(self):
@@ -199,7 +207,11 @@ class CookUpdateView(LoginRequiredMixin, PageBackgroundMixin, generic.UpdateView
 class CookDeleteView(LoginRequiredMixin, PageBackgroundMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("kitchen:cook-list")
-    page_bg_url = "https://images.pexels.com/photos/31769316/pexels-photo-31769316.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    page_bg_url = (
+        "https://images.pexels.com/photos/31769316/"
+        "pexels-photo-31769316.jpeg?auto=compress&cs=tinysrgb&"
+        "w=1260&h=750&dpr=2"
+    )
 
 
 @login_required
@@ -226,7 +238,10 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
         context["search_form"] = IngredientSearchForm(
             initial={"name": name}
         )
-        context["page_bg"] = "https://images.pexels.com/photos/6971733/pexels-photo-6971733.jpeg"
+        context["page_bg"] = (
+            "https://images.pexels.com/photos/"
+            "6971733/pexels-photo-6971733.jpeg"
+        )
         return context
 
     def get_queryset(self):
