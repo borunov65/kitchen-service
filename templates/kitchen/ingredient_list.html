@@ -27,7 +27,7 @@
               {{ ingredient.id }}
           </td>
           <td>
-              {{ ingredient.name }}
+              <a href="{{ ingredient.get_absolute_url }}">{{ ingredient.name }}</a>
           </td>
           <td>
               <a href="{% url 'kitchen:ingredient-update' pk=ingredient.id %}">

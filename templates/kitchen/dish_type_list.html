@@ -27,7 +27,7 @@
               {{ dish_type.id }}
           </td>
           <td>
-              {{ dish_type.name }}
+              <a href="{{ dish_type.get_absolute_url }}">{{ dish_type.name }}</a>
           </td>
           <td>
               <a href="{% url 'kitchen:dish-type-update' pk=dish_type.id %}">

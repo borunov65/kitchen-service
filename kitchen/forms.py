@@ -52,7 +52,8 @@ class CookUpdateForm(forms.ModelForm):
             "first_name",
             "last_name",
             "years_of_experience",
-            "username", "email"
+            "username",
+            "email"
         ]
 
 

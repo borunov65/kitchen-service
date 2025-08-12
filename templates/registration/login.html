@@ -2,7 +2,18 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-
+<div style="
+    min-height: 100vh;
+    background-image: url('https://images.pexels.com/photos/14026654/pexels-photo-14026654.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 2rem;
+">
 {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -20,5 +31,5 @@
   <input type="submit" value="Login" class="btn btn-primary" />
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
+</div>
 {% endblock %}

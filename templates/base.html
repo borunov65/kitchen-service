@@ -27,7 +27,11 @@
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
-<body>
+<body style="
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ page_bg }}');
+  background-size: cover;
+  background-position: center;
+">
 {% include "includes/navigation.html" %}
 {% if request.resolver_match.url_name != 'index' %}
 <style>
