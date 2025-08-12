@@ -16,7 +16,7 @@ from .views import (
     DishTypeCreateView,
     DishTypeUpdateView,
     DishTypeDeleteView,
-    toggle_assign_to_dish,
+    ToggleAssignToDishView,
     IngredientListView,
     IngredientCreateView,
     IngredientUpdateView,
@@ -70,7 +70,7 @@ urlpatterns = [
     ),
     path(
         "dishes/<int:pk>/toggle-assign/",
-        toggle_assign_to_dish,
+        ToggleAssignToDishView.as_view(),
         name="toggle-dish-assign",
     ),
     path("cooks/", CookListView.as_view(), name="cook-list"),
