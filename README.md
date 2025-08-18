@@ -7,6 +7,13 @@ simplifying the workflow.
 
 [Kitchen Service project deployed to Render](https://kitchen-service.render.com/)
 
+## Tests User Credentials
+
+You can log in to the application using the following test account:
+* **Username:** user
+* **Password:** user12345
+
+
 ## Installation
 
 ```shell
