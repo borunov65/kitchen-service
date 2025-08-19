@@ -2,17 +2,25 @@ import asyncio
 from pyppeteer import launch
 import os
 
+
 async def take_full_screenshot():
     chrome_path = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
     output_file = os.path.join(os.getcwd(), "demo.png")
 
-    browser = await launch(executablePath=chrome_path, headless=True, args=['--no-sandbox'])
+    browser = await launch(
+        executablePath=chrome_path,
+        headless=True,
+        args=['--no-sandbox']
+    )
     page = await browser.newPage()
 
     await page.setViewport({'width': 1440, 'height': 900})
 
     # Відкриваємо сторінку логіну
-    await page.goto("http://127.0.0.1:8000/accounts/login/", {'waitUntil': 'networkidle2'})
+    await page.goto(
+        "http://127.0.0.1:8000/accounts/login/",
+        {'waitUntil': 'networkidle2'}
+    )
 
     # Логін
     await page.type('input[name="username"]', 'admin')
