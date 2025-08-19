@@ -1,12 +1,28 @@
 #!/usr/bin/env bash
-# Exit on error
-set -o errexit
+set -e
 
-# Modify this line as needed for your package manager (pip, poetry, etc.)
-pip install -r requirements.txt
+echo "Starting build.sh"
 
-# Convert static asset files
-python manage.py collectstatic --no-input
+# Завантажуємо змінні з .env
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs)
+fi
 
-# Apply any outstanding database migrations
-python manage.py migrate
+# Встановлюємо Poetry, якщо він ще не встановлений
+if ! command -v poetry &> /dev/null
+then
+    echo "Poetry not found, installing..."
+    curl -sSL https://install.python-poetry.org | python3 -
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Встановлюємо залежності
+poetry install --no-root
+
+# Міграції
+python3 manage.py migrate
+
+# Збірка статичних файлів
+python3 manage.py collectstatic --noinput
+
+echo "Build finished successfully!"
