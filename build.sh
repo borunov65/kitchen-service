@@ -1,21 +1,12 @@
 #!/usr/bin/env bash
-set -e
+# Exit on error
+set -o errexit
 
-echo "Starting build.sh"
-
-# Завантажуємо змінні з .env
-if [ -f .env ]; then
-  export $(grep -v '^#' .env | xargs)
-fi
-
-# Оновлюємо pip і встановлюємо залежності
-pip install --upgrade pip
+# Modify this line as needed for your package manager (pip, poetry, etc.)
 pip install -r requirements.txt
 
-# Міграції
-python3 manage.py migrate
+# Convert static asset files
+python manage.py collectstatic --no-input
 
-# Збірка статичних файлів
-python3 manage.py collectstatic --noinput
-
-echo "Build finished successfully!"
+# Apply any outstanding database migrations
+python manage.py migrate
